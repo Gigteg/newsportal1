@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    NewsPortal - Регистрация
+{% endblock title %}
+
+
+{% block header %}
+    Страница регистрации
+{% endblock header %}
+
+
+{% block content %}
+    <div id="main_box" class="container">
+        <h3>Регистрация</h3>
+        <form id="form1" method="post" action="/account/signup">
+            {% csrf_token %}  <!-- ВКЛЮЧАЕМ РЕЖИМ ЗАЩИТЫ -->
+            <p>
+                <label for="login">Логин:</label><br>
+                <input type="text" id="login" name="login" placeholder="Введите логин" required></input>
+                <img src=""/>
+                <div id="login_err" class="err"></div>
+            </p>
+            <p>
+                <label for="email">E-mail:</label><br>
+                <input type="email" id="email" name="email" placeholder="Введите E-mail" required></input>
+                <div id="email_err" class="err"></div>
+            </p>
+            <p>
+                <label for="pass1">Пароль:</label><br>
+                <input type="password" id="pass1" name="pass1" placeholder="Введите пароль" required></input>
+                <div id="pass1_err" class="err"></div>
+            </p>
+            <p>
+                <label for="pass2">Пароль:</label><br>
+                <input type="password" id="pass2" name="pass2" placeholder="Повторите пароль" required></input>
+                <div id="pass2_err" class="err"></div>
+            </p>
+            <p style="text-align: center">
+                <input type="submit" value="Отправить" class="btn btn-primary">
+                <input type="reset" value="Очистить" class="btn btn-secondary">
+            </p>
+        </form>
+        <hr class="my_row">
+    </div>
+    <!-- селектор с # наз.-я id-селектор -->
+    <style>
+        #main_box {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .my_row {
+            border-color: gray;
+            margin-top: 25px;
+        }
+        #form1 {
+            border: 1px solid gray;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 350px;
+            text-align: left;
+            background-color: whitesmoke;
+            box-shadow: 0 0 gray, 0px 15px 40px gray;
+        }
+        #form1 input {
+            width: 90%;
+        }
+        #form1 input[type="submit"], #form1 input[type="reset"]{
+            width: 45%;
+            margin-top: 25px;
+        }
+        .err {
+            color: red;
+            margin-top: -10px;
+        }
+        img {
+            width: 24px;
+        }
+    </style>
+
+    <!-- JAVA SCRIPT -->
+    <script>
+
+        $(document).ready(function() {
+
+            //alert('Привет, Java Script!');
+
+            let valid = true;
+            let regExp1 = /[a-zA-Z][a-zA-Z0-9_\-]{4,15}$/;
+            //let regExp2 = //;
+            //let regExp3 = //;
+
+            //селекторы элементов с id обозначается решеткой джейкуери селектор с идентификатором
+            $('#login').blur(function () {
+                let login = $(this).val();
+                if (regExp1.test(login)) {
+                    $('#login_err').text('OK')
+                } else {
+                    $(this).css('border-color', 'red')
+                    $('#login_err').text('Логин не может быть пустым и содержать символы!');
+                }
+
+            });
+            $('#login').focus(function () {
+                $(this).css('border-color', '#32CD32')
+                $('#login_err').text('');
+
+            });
+
+        });
+
+
+
+    </script>
+{% endblock content %}

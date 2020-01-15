@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    NewsPortal - Главная
+{% endblock title %}
+
+
+{% block header %}
+    Главная страница
+{% endblock header %}
+
+
+{% block content %}
+    <div id="logo" class="jumbotron">
+    <div class="container">
+        <h1 class="display-3", style="color:#ffffff"><b>НОВОСТИ МЕГАПОЛИСА</b></h1>
+            <p, style="color:#ffffff">Самые актуальные новости</p>
+            <p><a class="btn btn-primary btn-lg" href="#" role="button">Все новости &raquo;</a></p>
+    </div>
+    </div>
+    <div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Главные новости</h2>
+                <p>Все важные новости за день. </p>
+                <p><a class="btn btn-secondary" href="#" role="button">Подробнее &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Политика</h2>
+                <p>Главные политические события. </p>
+                <p><a class="btn btn-secondary" href="#" role="button">Подробнее &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Экономика</h2>
+                <p>Главные экономичесские события. </p>
+                <p><a class="btn btn-secondary" href="#" role="button">Подробнее &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Происшествия</h2>
+                <p>События дня. </p>
+                <p><a class="btn btn-secondary" href="#" role="button">Подробнее &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Общество</h2>
+                <p>События, которые касаются каждого из нас. </p>
+                <p><a class="btn btn-secondary" href="#" role="button">Подробнее &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Спорт</h2>
+                <p>Главные новости из мира спорта. </p>
+                <p><a class="btn btn-secondary" href="#" role="button">Подробнее &raquo;</a></p>
+        </div>
+    </div>
+
+    <hr class="my_row">
+
+  </div>
+{% endblock content %}
