@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 data = dict()
 
+
 def get_user(request):
     global data
     if 'user' in request.session:

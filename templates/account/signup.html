@@ -19,7 +19,7 @@
             <p>
                 <label for="login">Логин:</label><br>
                 <input type="text" id="login" name="login" placeholder="Введите логин" required></input>
-                <img src=""/>
+                <img id="login_img" width="24" src=""/>
                 <div id="login_err" class="err"></div>
             </p>
             <p>
@@ -93,12 +93,23 @@
             //let regExp3 = //;
 
             //селекторы элементов с id обозначается решеткой джейкуери селектор с идентификатором
-            $('#login').blur(function () {
+                   $('#login').blur(function () {
                 let login = $(this).val();
                 if (regExp1.test(login)) {
-                    $('#login_err').text('OK')
+
+                    //проверка занятости логина
+                    $.ajax({
+                        url:"add.php",
+                        data:"x=4&y=5",
+                        success:function(result){
+                            $("#par1").html(result)
+                        }
+                    });
+
+                    $('#login_img').attr('src', '../../static/img/ok.png');
                 } else {
-                    $(this).css('border-color', 'red')
+                    //$(this).css('border-color', 'red')
+                    $('#login_img').attr('src', '../../static/img/cross.png');
                     $('#login_err').text('Логин не может быть пустым и содержать символы!');
                 }
 
