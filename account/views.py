@@ -1,11 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from hashlib import md5
 from datetime import datetime
 from .models import User
+from django.http import JsonResponse
 
 # Create your views here.
 
 data = dict()
+
 
 def get_user(request):
     global data
@@ -59,7 +61,7 @@ def signup(request):
             data['status'] = status
             """
 
-            #СОХРАНЕНИЕ ДАННЫХ В БАЗЕ
+            # СОХРАНЕНИЕ ДАННЫХ В БАЗЕ
             new_user = User()
             new_user.login = login
             new_user.passw = passw
@@ -68,9 +70,8 @@ def signup(request):
             new_user.status = status
             new_user.save()
 
-            #Result
+            # Result
             data['report'] = 'Регистрация успешно завершена'
-
 
         # ОТПРАВКА ДАННЫХ НА СТРАНИЦУ ОТЧЕТА
         return render(request, 'account/signup_res.html', context=data)
@@ -97,22 +98,43 @@ def signin(request):
         _hash = md5(_byte)
         _passw = _hash.hexdigest()
 
-        #ПРОВЕРКА ПОЛЬЗОВАТЕЛЯ
+        # ПРОВЕРКА ПОЛЬЗОВАТЕЛЯ
         try:
             user = User.objects.get(login=_login, passw=_passw)
             data['report'] = 'Вы успешно авторизированы!'
             data['x_color'] = 'darkcyan'
             request.session['user'] = _login
+            return redirect('/home')
         except User.DoesNotExist as err:
             data['report'] = 'Вы ввели неверные имя пользователя или пароль!'
             data['x_color'] = 'red'
+            return render(request, 'account/signin_res.html', context=data)
 
-        # ЗАГРУЗКА СТРАНИЦЫ ОТЧЕТА
-        return render(request, 'account/signin_res.html', context=data)
 
 def signout(request):
-    return render(request, 'account/signout.html')
+    global data
+    get_user(request)
+    del request.session['user']
+    return redirect('/home')
+    # return render(request, 'account/signout.html', context=data)
 
 
 def profile(request):
-    return render(request, 'account/profile.html')
+    global data
+    get_user(request)
+    return render(request, 'account/profile.html', context=data)
+
+
+def ajax_reg(request):
+    response = dict()
+    _login = request.GET.get('login')
+
+    response['mess'] = '111'
+
+    try:
+        user = User.objects.get(login=_login)
+        response['mess'] = 'занят'
+    except User.DoesNotExist as err:
+        response['mess'] = 'свободен'
+
+    return JsonResponse(response)

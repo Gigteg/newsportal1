@@ -89,24 +89,30 @@
 
             let valid = true;
             let regExp1 = /[a-zA-Z][a-zA-Z0-9_\-]{4,15}$/;
-            //let regExp2 = //;
+            let regExp2 = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])[A-Za-z0-9_\-]{8,16}$;
             //let regExp3 = //;
 
             //селекторы элементов с id обозначается решеткой джейкуери селектор с идентификатором
                    $('#login').blur(function () {
                 let login = $(this).val();
+                //проверка регулярки
                 if (regExp1.test(login)) {
 
                     //проверка занятости логина
                     $.ajax({
-                        url:"add.php",
-                        data:"x=4&y=5",
+                        url:"/account/ajax_reg",
+                        data:"login=" + login,
                         success:function(result){
-                            $("#par1").html(result)
+                            if (result.mess == 'занят') {
+                                $('#login_img').attr('src', '../../static/img/cross.png');
+                                $('#login_err').text('Логи занят!');
+                            } else {
+                                $('#login_img').attr('src', '../../static/img/ok.png');
+                                $('#login_err').text('');
+                            }
                         }
                     });
 
-                    $('#login_img').attr('src', '../../static/img/ok.png');
                 } else {
                     //$(this).css('border-color', 'red')
                     $('#login_img').attr('src', '../../static/img/cross.png');
@@ -116,7 +122,7 @@
             });
             $('#login').focus(function () {
                 $(this).css('border-color', '#32CD32')
-                $('#login_err').text('');
+
 
             });
 

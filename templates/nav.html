@@ -34,17 +34,29 @@
                         {{ user }}!
                     </a>
                 </li>
-                <li>
-                    <a class="nav-link" href="/account/signin">
-                        {{ link1 }}
-                    </a>
-                </li>
-                <li>
-                    <a class="nav-link" href="/account/signup">
-                        {{ link2 }}
-                    </a>
-                </li>
-
+                {% if user == 'Гость' %}
+                    <li>
+                        <a class="nav-link" href="/account/signin">
+                            {{ link1 }}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="/account/signup">
+                            {{ link2 }}
+                        </a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a class="nav-link" href="/account/profile">
+                            Профиль
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="/account/signout">
+                            Выход
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
