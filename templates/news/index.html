@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    NewsPortal - Новости
+{% endblock title %}
+
+
+{% block header %}
+    Страница новостей
+{% endblock header %}
+
+
+{% block content %}
+    <div id="main_box" class="container">
+        <h3>Новости</h3>
+        <hr class="my_row">
+        {% if user == admin1 %}
+        <a href="/news/create">Добавить новость</a>
+        {% endif %}
+        <hr class="my_row">
+    </div>
+    <!-- селектор с # наз.-я id-селектор -->
+    <style>
+        #main_box {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .my_row {
+            border-color: gray;
+            margin-top: 25px;
+        }
+    </style>
+{% endblock content %}

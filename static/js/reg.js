@@ -46,24 +46,35 @@
               })
                 //Ввод второго пароля:
               $('#pass2').blur(function(){
-
               })
                 //Ввод имейла:
               $('#email').blur(function(){
-
               })
                 //Исправление данных:
               $('#login').focus(function() {
                     $('#login_err').text('');
-                })
+              })
               $('#pass1').focus(function() {
                     $('#pass1_err').text('');
-                })
+              })
               $('#pass2').focus(function() {
                     $('#pass2_err').text('');
-                })
+              })
               $('#email').focus(function() {
                     $('#email_err').text('');
-                })
+              });
+
+              // Код проверки результатов валидации:
+              //------------------------------------
+                //джекуери селектор кнопки сабмит
+              $('#submit').clic(function (event) {
+              event.preventDefault();
+                alert(1);
+                if (valid == true) {
+                $('#form1').attr('onsubmit', 'return true') // разблокировать отправку данных на сервер
+                }else{
+                $('#form1').attr('onsubmit', 'return false') // заблокировать отправку данных на сервер
+                }
+              })
 
         });
